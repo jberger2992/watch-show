@@ -5,7 +5,7 @@ var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
 var imdbAPIKey = "k_erq5m755";
 var showInfoDiv = document.getElementById("show-info");
-
+var cardInfo =  document.getElementById("card-info");
 //var showSearched = inputArea.value
 var showSearched = "Mandalorian"; // placeholder search
 
@@ -13,6 +13,7 @@ var showSearched = "Mandalorian"; // placeholder search
 //var selectedID = "";
 //var selectedImage = "";
 //var selectedDescription = "";
+
 var selectedTitle = "The Mandalorian"; //placeholder search "The Mandalorian"
 var selectedID = "tt8111088"; // placeholder search "The Mandalorian"
 // var selectedID = "tt0460627"; // placeholder search "Bones"
@@ -60,17 +61,24 @@ function searchShows(){
             var titleBtn = document.createElement("button");
             titleBtn.innerText = data.results[i].title;
             titleBtn.classList.add("delete");
-            document.body.appendChild(titleBtn);
+            cardInfo.appendChild(titleBtn);
             var descriptionP = document.createElement("p");
             descriptionP.innerText = data.results[i].description;
             descriptionP.classList.add("delete");
-            document.body.appendChild(descriptionP);
+            cardInfo.appendChild(descriptionP);
             // on clicking a title it sets the values for that title and deletes the search results from the page
             titleBtn.addEventListener("click", function(){
+                this.classList.remove("delete")
                 selectedTitle = data.results[i].title;
                 selectedID = data.results[i].id;
                 selectedImage = data.results[i].image;
                 selectedDescription = data.results[i].description;
+                cardInfo.innerHTML = `
+                <h2>${selectedTitle}</h2>
+                <h2>${selectedID}</h2>
+                <h2>${selectedImage}</h2>
+                <h2>${selectedDescription}</h2>
+                `
                 document.querySelectorAll('.delete').forEach(e => e.remove());
                 displayShow()
             })
@@ -119,3 +127,4 @@ function displayShow(){
     showInfoDiv.appendChild(descriptionP);
     searchSeasons();
 }
+
