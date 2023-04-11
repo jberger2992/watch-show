@@ -18,7 +18,7 @@ var selectedID = "tt8111088"; // placeholder search "The Mandalorian"
 // var selectedID = "tt0460627"; // placeholder search "Bones"
 var selectedImage = "https://m.media-amazon.com/images/M/MV5BZjRlZDIyNDMtZjIwYi00YmJiLTg4NjMtODA2Mjc0YTBlNzIwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_Ratio0.6757_AL_.jpg"; //placeholder search "The Mandalorian"
 var selectedDescription = "2019- TV Series Pedro Pascal, Chris Bartlett"; //placeholder search "The Mandalorian"
-var season = "1";
+var season = "3";
 
 // This function finds the season information from a series and logs each episode's release date
 function searchSeasons(){
@@ -46,7 +46,13 @@ function searchNextDate(){
         for (let i = 0; i < data.episodes.length; i++) {
             console.log(data.episodes[i].released)
             var newDate = data.episodes[i].released.replace(".", "");
-            console.log(newDate);
+            var newUnix = dayjs(newDate).unix();
+            var nowUnix = Date.now();
+            var newUnixM = newUnix*1000
+            if(newUnix >= nowUnix){
+                console.log(newDate);
+                return;
+            }
         }
     })
 }
