@@ -3,7 +3,8 @@ var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-var imdbAPIKey = "k_erq5m755";
+// var imdbAPIKey = "k_erq5m755";
+var imdbAPIKey = "k_6hswr9n7";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 
@@ -141,3 +142,4 @@ function displayShow(){
     showInfoDiv.appendChild(descriptionP);
     searchSeasons();
 }
+
