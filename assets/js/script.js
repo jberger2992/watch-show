@@ -15,43 +15,44 @@ var selectedID = "tt8111088"; // placeholder search "The Mandalorian"
 // var selectedID = "tt0460627"; // placeholder search "Bones"
 var selectedImage = "https://m.media-amazon.com/images/M/MV5BZjRlZDIyNDMtZjIwYi00YmJiLTg4NjMtODA2Mjc0YTBlNzIwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_Ratio0.6757_AL_.jpg"; //placeholder search "The Mandalorian"
 var selectedDescription = "2019- TV Series Pedro Pascal, Chris Bartlett"; //placeholder search "The Mandalorian"
-
+var season = "1";
 
 // This function finds the season information from a series and logs each episode's release date
 function searchSeasons(){
-    var showSeasons = " "
+    // var showSeasons = " "
     //fetches the selected title's ID to get the number of seasons in order to determin the current season
     fetch ("https://imdb-api.com/en/API/Title/"+imdbAPIKey+"/"+selectedID)
     .then(function (response) {
         return response.json();
       })
       .then(function (data){
-        console.log(data);
-        var season = data.tvSeriesInfo.seasons.length;
-        showSeasons = "https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+selectedID+"/"+season
+        console.log(data); // --remove for deploy--
+        season = data.tvSeriesInfo.seasons.length;
+        searchNextDate();
         })
-    //fetches the season information to get the release dates of episodes
-  fetch(showSeasons)
+}
+//fetches the season information to get the release dates of episodes
+function searchNextDate(){
+  fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+selectedID+"/"+season)
   .then(function (response) {
       return response.json();
     })
     .then(function (data){
-        console.log(data);
+        console.log(data); // --remove for deploy--
         for (let i = 0; i < data.episodes.length; i++) {
             console.log(data.episodes[i].released)
         }
     })
 }
 //fetches results for the searched title
-//TODO: eventListener on search to run this function
 function searchShows(){
     fetch("https://imdb-api.com/en/API/SearchSeries/"+imdbAPIKey+"/"+showSearched)
     .then(function (response) {
         return response.json();
     })
       .then(function (data){
-        console.log(data);
-        //TODO: append results of search
+        console.log(data); // --remove for deploy--
+        // displays for each result from the search
         for (let i = 0; i < data.results.length; i++) {
             var titleBtn = document.createElement("button");
             titleBtn.innerText = data.results[i].title;
@@ -61,6 +62,7 @@ function searchShows(){
             descriptionP.innerText = data.results[i].description;
             descriptionP.classList.add("del");
             document.body.appendChild(descriptionP);
+            // on clicking a title it sets the values for that title and deletes the search results from the page
             titleBtn.addEventListener("click", function(){
                 selectedTitle = data.results[i].title;
                 selectedID = data.results[i].id;
@@ -70,11 +72,6 @@ function searchShows(){
                 displayShow()
             })
         }
-        //TODO: eventListener for running displayShow()
-        //--data.results[i].title -- Title of the show
-        //--data.results[i].id -- id used for further fetches
-        //--data.results[i].image -- image for the show
-        //--data.results[i].description -- description of the show
         })
 }
 //fetches where the selected show can be streamed
@@ -84,7 +81,7 @@ function findPlatforms(){
         return response.json();
     })
       .then(function (data){
-        console.log(data);
+        console.log(data); // --remove for deploy--
         //TODO: Needs to append results
         for (let i = 0; i < data.sources.length; i++) {
             if(data.sources[i].type == "sub"){
