@@ -1,9 +1,7 @@
 # watch-show
 
-<!-- 
-image url
-external url 
--->
+https://jberger2992.github.io/watch-show/
+![screenshot](./assets/images/230411WatchShowSample.png)
 https://github.com/jberger2992/watch-show.git
 
 
