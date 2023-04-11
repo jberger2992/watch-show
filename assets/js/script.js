@@ -3,9 +3,15 @@ var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-var imdbAPIKey = "k_erq5m755";
+// var imdbAPIKey = "k_erq5m755";
+var imdbAPIKey = "k_6hswr9n7";
 var showInfoDiv = document.getElementById("show-info");
+<<<<<<< HEAD
 var cardInfo =  document.getElementById("card-info");
+=======
+var episodeDiv = document.getElementById("episode");
+
+>>>>>>> dev
 //var showSearched = inputArea.value
 var showSearched = "Mandalorian"; // placeholder search
 
@@ -19,7 +25,7 @@ var selectedID = "tt8111088"; // placeholder search "The Mandalorian"
 // var selectedID = "tt0460627"; // placeholder search "Bones"
 var selectedImage = "https://m.media-amazon.com/images/M/MV5BZjRlZDIyNDMtZjIwYi00YmJiLTg4NjMtODA2Mjc0YTBlNzIwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_Ratio0.6757_AL_.jpg"; //placeholder search "The Mandalorian"
 var selectedDescription = "2019- TV Series Pedro Pascal, Chris Bartlett"; //placeholder search "The Mandalorian"
-var season = "1";
+var season = "3";
 
 // This function finds the season information from a series and logs each episode's release date
 function searchSeasons(){
@@ -35,6 +41,7 @@ function searchSeasons(){
         searchNextDate();
         })
 }
+
 //fetches the season information to get the release dates of episodes
 function searchNextDate(){
   fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+selectedID+"/"+season)
@@ -43,11 +50,29 @@ function searchNextDate(){
     })
     .then(function (data){
         console.log(data); // --remove for deploy--
+        //loops through episodes from the latest season
         for (let i = 0; i < data.episodes.length; i++) {
             console.log(data.episodes[i].released)
+            var newDate = data.episodes[i].released.replace(".", "");
+            var newUnix = dayjs(newDate).unix();
+            var nowUnix = Date.now();
+            var newUnixM = newUnix*1000
+            //When the next coming episode is found, displays result to page
+            if(newUnixM > nowUnix){
+                var episodeTitle = document.createElement("p");
+                episodeTitle.innerText = data.episodes[i].title;
+                episodeTitle.classList.add("delete");
+                episodeDiv.appendChild(episodeTitle);
+                var episodeDate = document.createElement("p");
+                episodeDate.innerText = data.episodes[i].released;
+                episodeDate.classList.add("delete");
+                episodeDiv.appendChild(episodeDate);
+                return;
+            }
         }
     })
 }
+
 //fetches results for the searched title
 function searchShows(){
     fetch("https://imdb-api.com/en/API/SearchSeries/"+imdbAPIKey+"/"+showSearched)
@@ -61,11 +86,19 @@ function searchShows(){
             var titleBtn = document.createElement("button");
             titleBtn.innerText = data.results[i].title;
             titleBtn.classList.add("delete");
+<<<<<<< HEAD
             cardInfo.appendChild(titleBtn);
             var descriptionP = document.createElement("p");
             descriptionP.innerText = data.results[i].description;
             descriptionP.classList.add("delete");
             cardInfo.appendChild(descriptionP);
+=======
+            showInfoDiv.appendChild(titleBtn);
+            var descriptionP = document.createElement("p");
+            descriptionP.innerText = data.results[i].description;
+            descriptionP.classList.add("delete");
+            showInfoDiv.appendChild(descriptionP);
+>>>>>>> dev
             // on clicking a title it sets the values for that title and deletes the search results from the page
             titleBtn.addEventListener("click", function(){
                 this.classList.remove("delete")
@@ -85,6 +118,7 @@ function searchShows(){
         }
         })
 }
+
 //fetches where the selected show can be streamed
 function findPlatforms(){
     fetch("https://api.watchmode.com/v1/title/"+selectedID+"/details/?apiKey="+watchAPIKey+"&append_to_response=sources")
@@ -117,6 +151,7 @@ function findPlatforms(){
         }
     })
 }
+
 function displayShow(){
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
