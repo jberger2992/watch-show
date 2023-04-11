@@ -53,12 +53,22 @@ function searchShows(){
         console.log(data);
         //TODO: append results of search
         for (let i = 0; i < data.results.length; i++) {
-            var titleH4 = document.createElement("h4");
+            var titleBtn = document.createElement("button");
+            titleBtn.innerText = data.results[i].title;
+            titleBtn.classList.add("del");
+            document.body.appendChild(titleBtn);
             var descriptionP = document.createElement("p");
-            titleH4.innerText = data.results[i].title;
             descriptionP.innerText = data.results[i].description;
-            document.body.appendChild(titleH4);
+            descriptionP.classList.add("del");
             document.body.appendChild(descriptionP);
+            titleBtn.addEventListener("click", function(){
+                selectedTitle = data.results[i].title;
+                selectedID = data.results[i].id;
+                selectedImage = data.results[i].image;
+                selectedDescription = data.results[i].description;
+                document.querySelectorAll('.del').forEach(e => e.remove());
+                displayShow()
+            })
         }
         //TODO: eventListener for running displayShow()
         //--data.results[i].title -- Title of the show
@@ -87,7 +97,7 @@ function findPlatforms(){
     })
 }
 function displayShow(){
-    imageArea.src = selectedImage;
+    // imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
     var descriptionP = document.createElement("p");
     titleH3.innerText = selectedTitle;
