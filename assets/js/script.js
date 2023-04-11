@@ -86,15 +86,23 @@ function findPlatforms(){
         var streamFree = document.createElement("h6");
         streamFree.textContent = "Free: "
         streamFree.classList.add("del");
+        document.body.appendChild(streamFree);
         var streamSub = document.createElement("h6");
         streamSub.textContent = "Sub: "
         streamSub.classList.add("del");
+        document.body.appendChild(streamSub);
         for (let i = 0; i < data.sources.length; i++) {
             if(data.sources[i].type == "sub"){
-                console.log("sub", data.sources[i].name)
+                var platformSub = document.createElement("p");
+                platformSub.textContent = data.sources[i].name;
+                document.streamSub.appendChild(platformSub);
+                console.log("sub", data.sources[i].name);
             }
             if(data.sources[i].type == "free"){
                 console.log("free", data.sources[i].name)
+                var platformFree = document.createElement("p");
+                platformFree.textContent = data.sources[i].name;
+                document.streamFree.appendChild(platformFree);
             }
         }
     })
