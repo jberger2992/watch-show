@@ -5,9 +5,10 @@ var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
 var imdbAPIKey = "k_erq5m755";
 var showInfoDiv = document.getElementById("show-info");
+var episodeDiv = document.getElementById("episode");
 
 //var showSearched = inputArea.value
-var showSearched = "Bones"; // placeholder search
+var showSearched = "Mandalorian"; // placeholder search
 
 //var selectedTitle = "";
 //var selectedID = "";
@@ -43,14 +44,23 @@ function searchNextDate(){
     })
     .then(function (data){
         console.log(data); // --remove for deploy--
+        //loops through episodes from the latest season
         for (let i = 0; i < data.episodes.length; i++) {
             console.log(data.episodes[i].released)
             var newDate = data.episodes[i].released.replace(".", "");
             var newUnix = dayjs(newDate).unix();
             var nowUnix = Date.now();
             var newUnixM = newUnix*1000
-            if(newUnix >= nowUnix){
-                console.log(newDate);
+            //When the next coming episode is found, displays result to page
+            if(newUnixM > nowUnix){
+                var episodeTitle = document.createElement("p");
+                episodeTitle.innerText = data.episodes[i].title;
+                episodeTitle.classList.add("delete");
+                episodeDiv.appendChild(episodeTitle);
+                var episodeDate = document.createElement("p");
+                episodeDate.innerText = data.episodes[i].released;
+                episodeDate.classList.add("delete");
+                episodeDiv.appendChild(episodeDate);
                 return;
             }
         }
@@ -70,11 +80,11 @@ function searchShows(){
             var titleBtn = document.createElement("button");
             titleBtn.innerText = data.results[i].title;
             titleBtn.classList.add("delete");
-            document.body.appendChild(titleBtn);
+            showInfoDiv.appendChild(titleBtn);
             var descriptionP = document.createElement("p");
             descriptionP.innerText = data.results[i].description;
             descriptionP.classList.add("delete");
-            document.body.appendChild(descriptionP);
+            showInfoDiv.appendChild(descriptionP);
             // on clicking a title it sets the values for that title and deletes the search results from the page
             titleBtn.addEventListener("click", function(){
                 selectedTitle = data.results[i].title;
