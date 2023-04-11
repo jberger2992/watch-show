@@ -52,6 +52,14 @@ function searchShows(){
       .then(function (data){
         console.log(data);
         //TODO: append results of search
+        for (let i = 0; i < data.results.length; i++) {
+            var titleH4 = document.createElement("h4");
+            var descriptionP = document.createElement("p");
+            titleH4.innerText = data.results[i].title;
+            descriptionP.innerText = data.results[i].description;
+            document.body.appendChild(titleH4);
+            document.body.appendChild(descriptionP);
+        }
         //TODO: eventListener for running displayShow()
         //--data.results[i].title -- Title of the show
         //--data.results[i].id -- id used for further fetches
@@ -80,11 +88,11 @@ function findPlatforms(){
 }
 function displayShow(){
     imageArea.src = selectedImage;
-    var titleH4 = document.createElement("h4");
+    var titleH3 = document.createElement("h3");
     var descriptionP = document.createElement("p");
-    titleH4.innerText = selectedTitle;
+    titleH3.innerText = selectedTitle;
     descriptionP.innerText = selectedDescription;
-    document.body.appendChild(titleH4); //TODO: append at proper html location
+    document.body.appendChild(titleH3); //TODO: append at proper html location
     document.body.appendChild(descriptionP); //TODO: append at proper html location
     searchSeasons();
 }
