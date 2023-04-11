@@ -56,11 +56,11 @@ function searchShows(){
         for (let i = 0; i < data.results.length; i++) {
             var titleBtn = document.createElement("button");
             titleBtn.innerText = data.results[i].title;
-            titleBtn.classList.add("del");
+            titleBtn.classList.add("delete");
             document.body.appendChild(titleBtn);
             var descriptionP = document.createElement("p");
             descriptionP.innerText = data.results[i].description;
-            descriptionP.classList.add("del");
+            descriptionP.classList.add("delete");
             document.body.appendChild(descriptionP);
             // on clicking a title it sets the values for that title and deletes the search results from the page
             titleBtn.addEventListener("click", function(){
@@ -68,7 +68,7 @@ function searchShows(){
                 selectedID = data.results[i].id;
                 selectedImage = data.results[i].image;
                 selectedDescription = data.results[i].description;
-                document.querySelectorAll('.del').forEach(e => e.remove());
+                document.querySelectorAll('.delete').forEach(e => e.remove());
                 displayShow()
             })
         }
@@ -83,6 +83,12 @@ function findPlatforms(){
       .then(function (data){
         console.log(data); // --remove for deploy--
         //TODO: Needs to append results
+        var streamFree = document.createElement("h6");
+        streamFree.textContent = "Free: "
+        streamFree.classList.add("del");
+        var streamSub = document.createElement("h6");
+        streamSub.textContent = "Sub: "
+        streamSub.classList.add("del");
         for (let i = 0; i < data.sources.length; i++) {
             if(data.sources[i].type == "sub"){
                 console.log("sub", data.sources[i].name)
