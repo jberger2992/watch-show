@@ -1,7 +1,10 @@
 //var inputArea = document.querySelector("#");
+var platformFreeDiv = document.getElementById("platformFree");
+var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
 var imdbAPIKey = "k_erq5m755";
+var showInfoDiv = document.getElementById("show-info");
 
 //var showSearched = inputArea.value
 var showSearched = "Mandalorian"; // placeholder search
@@ -82,38 +85,37 @@ function findPlatforms(){
     })
       .then(function (data){
         console.log(data); // --remove for deploy--
-        //TODO: Needs to append results
+        //TODO: Instead of text, display links to streaming site
         var streamFree = document.createElement("h6");
         streamFree.textContent = "Free: "
         streamFree.classList.add("delete");
-        document.body.appendChild(streamFree);
+        platformFreeDiv.appendChild(streamFree);
         var streamSub = document.createElement("h6");
         streamSub.textContent = "Sub: "
-        streamSub.classList.add("delete");
-        document.body.appendChild(streamSub);
+        platformSubDiv.appendChild(streamSub);
         for (let i = 0; i < data.sources.length; i++) {
             if(data.sources[i].type == "sub"){
+                console.log("sub", data.sources[i].name);
                 var platformSub = document.createElement("p");
                 platformSub.textContent = data.sources[i].name;
-                document.body.h6.appendChild(platformSub);
-                console.log("sub", data.sources[i].name);
+                platformSubDiv.appendChild(platformSub); 
             }
             if(data.sources[i].type == "free"){
                 console.log("free", data.sources[i].name)
                 var platformFree = document.createElement("p");
                 platformFree.textContent = data.sources[i].name;
-                document.body.h6.appendChild(platformFree);
+                platformFreeDiv.appendChild(platformFree);
             }
         }
     })
 }
 function displayShow(){
-    // imageArea.src = selectedImage;
+    imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
     var descriptionP = document.createElement("p");
     titleH3.innerText = selectedTitle;
     descriptionP.innerText = selectedDescription;
-    document.body.appendChild(titleH3); //TODO: append at proper html location
-    document.body.appendChild(descriptionP); //TODO: append at proper html location
+    showInfoDiv.appendChild(titleH3);
+    showInfoDiv.appendChild(descriptionP);
     searchSeasons();
 }
