@@ -9,7 +9,7 @@ var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 
 //var showSearched = inputArea.value
-var showSearched = "Mandalorian"; // placeholder search
+var showSearched = "Bones"; // placeholder search
 
 //var selectedTitle = "";
 //var selectedID = "";
@@ -65,6 +65,15 @@ function searchNextDate(){
                 return;
             }
         }
+        var lastEp = data.episodes.length - 1;
+        var oldEp = document.createElement("p");
+        oldEp.innerText = "Last aired episode: "
+        oldEp.classList.add("delete");
+        episodeDiv.appendChild(oldEp);
+        var recent = document.createElement('p');
+        recent.innerText = data.episodes[lastEp].released.replace(".", "");
+        recent.classList.add("delete");
+        episodeDiv.appendChild(recent);
     })
 }
 
