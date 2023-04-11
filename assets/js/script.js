@@ -7,7 +7,7 @@ var imdbAPIKey = "k_erq5m755";
 var showInfoDiv = document.getElementById("show-info");
 
 //var showSearched = inputArea.value
-var showSearched = "Mandalorian"; // placeholder search
+var showSearched = "Bones"; // placeholder search
 
 //var selectedTitle = "";
 //var selectedID = "";
@@ -34,6 +34,7 @@ function searchSeasons(){
         searchNextDate();
         })
 }
+
 //fetches the season information to get the release dates of episodes
 function searchNextDate(){
   fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+selectedID+"/"+season)
@@ -44,9 +45,12 @@ function searchNextDate(){
         console.log(data); // --remove for deploy--
         for (let i = 0; i < data.episodes.length; i++) {
             console.log(data.episodes[i].released)
+            var newDate = data.episodes[i].released.replace(".", "");
+            console.log(newDate);
         }
     })
 }
+
 //fetches results for the searched title
 function searchShows(){
     fetch("https://imdb-api.com/en/API/SearchSeries/"+imdbAPIKey+"/"+showSearched)
@@ -77,6 +81,7 @@ function searchShows(){
         }
         })
 }
+
 //fetches where the selected show can be streamed
 function findPlatforms(){
     fetch("https://api.watchmode.com/v1/title/"+selectedID+"/details/?apiKey="+watchAPIKey+"&append_to_response=sources")
@@ -109,6 +114,7 @@ function findPlatforms(){
         }
     })
 }
+
 function displayShow(){
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
