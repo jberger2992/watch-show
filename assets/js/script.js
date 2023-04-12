@@ -349,8 +349,15 @@ function loadFavorites(){
                       favoritesDiv.appendChild(favoriteCard);
                       var titleH5 = document.createElement("h5");
                       titleH5.innerText = data.title;
-                      favoriteCard.classList.add("favoriteD");
+                      titleH5.classList.add("favoriteD");
                       favoriteCard.appendChild(titleH5);
+                      var removeBtn = document.createElement("button");
+                      removeBtn.innerText = "X";
+                      remove.classList.add("favoriteD");
+                      favoriteCard.appendChild(titleH5);
+                      removeBtn.addEventListener("click", function(){
+                        
+                      })
                       console.log(data); // --remove for deploy--
                       for (let i = 0; i < data.episodes.length; i++) {
                             console.log(data.episodes[i].released)
