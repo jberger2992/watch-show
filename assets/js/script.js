@@ -106,6 +106,8 @@ function searchNextDate(){
     })
 }
 
+
+
 //fetches results for the searched title
 function searchShows(){
     fetch("https://imdb-api.com/en/API/SearchSeries/"+imdbAPIKey+"/"+showSearched)
