@@ -11,6 +11,9 @@ var episodeDiv = document.getElementById("episode");
 //var showSearched = inputArea.value
 var showSearched = "Bones"; // placeholder search
 
+//var favoriteShows = []
+var favoriteShows = ["tt8111088", "tt0460627"] //placeholder shows
+
 //var selectedTitle = "";
 //var selectedID = "";
 //var selectedImage = "";
@@ -89,7 +92,7 @@ function searchShows(){
         for (let i = 0; i < data.results.length; i++) {
             var titleBtn = document.createElement("button");
             titleBtn.innerText = data.results[i].title;
-            titleBtn.classList.add("delete");
+            titleBtn.classList.add("delete","searchbtn");
             showInfoDiv.appendChild(titleBtn);
             var descriptionP = document.createElement("p");
             descriptionP.innerText = data.results[i].description;
@@ -141,6 +144,7 @@ function findPlatforms(){
     })
 }
 
+//Creates the elements to display the selected show
 function displayShow(){
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
