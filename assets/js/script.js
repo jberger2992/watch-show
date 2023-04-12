@@ -7,6 +7,7 @@ var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
 var imdbAPIKey = "k_6hswr9n7";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
+var favoritesDiv = document.getElementById("favorites");
 
 
 // var updates possible shows list font format
@@ -128,10 +129,6 @@ function searchShows(){
             titleBtn.innerText = data.results[i].title;
             titleBtn.classList.add("searchD","searchbtn");
             searchCard.appendChild(titleBtn);
-            var descriptionP = document.createElement("p");
-            descriptionP.innerText = data.results[i].description;
-            descriptionP.classList.add("searchD");
-            searchCard.appendChild(descriptionP);
             // on clicking a title it sets the values for that title and deletes the search results from the page
             titleBtn.addEventListener("click", function(){
                 selectedTitle = data.results[i].title;
@@ -347,7 +344,7 @@ function loadFavorites(){
                       //loops through episodes from the latest season
                       var favoriteCard = document.createElement("div");
                       favoriteCard.classList.add("favoriteD","favoritecard");
-                      showInfoDiv.appendChild(favoriteCard);
+                      favoritesDiv.appendChild(favoriteCard);
                       var titleH5 = document.createElement("h5");
                       titleH5.innerText = data.title;
                       favoriteCard.classList.add("favoriteD");
