@@ -9,10 +9,10 @@ var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 
 //var showSearched = inputArea.value
-var showSearched = "The Flash"; // placeholder search
+var showSearched = "The Madnalorian"; // placeholder search
 
 //var favoriteShows = []
-// var favoriteShowsSea = []
+//var favoriteShowsSea = []
 var favoriteShowsID = ["tt8111088", "tt3107288","tt0460627"] //placeholder shows
 var favoriteShowsSea = ["3","9","12"] //placeholder seasons
 
@@ -61,11 +61,15 @@ function searchNextDate(){
             if(newUnixM > nowUnix){
                 var episodeTitle = document.createElement("p");
                 episodeTitle.innerText = data.episodes[i].title;
-                episodeTitle.classList.add("delete");
+                episodeTitle.classList.add("selectD");
                 episodeDiv.appendChild(episodeTitle);
                 var episodeDate = document.createElement("p");
                 episodeDate.innerText = data.episodes[i].released;
-                episodeDate.classList.add("delete");
+                episodeDate.classList.add("selectD");
+                episodeDiv.appendChild(episodeDate);                
+                var episodeDate = document.createElement("button");
+                episodeDate.innerText = "Favorite";
+                episodeDate.classList.add("selectD");
                 episodeDiv.appendChild(episodeDate);
                 return;
             }
@@ -73,11 +77,11 @@ function searchNextDate(){
         var lastEp = data.episodes.length - 1;
         var oldEp = document.createElement("p");
         oldEp.innerText = "Last aired episode: "
-        oldEp.classList.add("delete");
+        oldEp.classList.add("selectD");
         episodeDiv.appendChild(oldEp);
         var recent = document.createElement('p');
         recent.innerText = data.episodes[lastEp].released.replace(".", "");
-        recent.classList.add("delete");
+        recent.classList.add("selectD");
         episodeDiv.appendChild(recent);
     })
 }
@@ -90,8 +94,13 @@ function searchShows(){
     })
       .then(function (data){
         console.log(data); // --remove for deploy--
+        var titleResults = data.results;
+        console.log(titleResults);
+        if(data.results.length > 10){
+            titleResults = data.results.slice(0,5);
+        }
         // displays for each result from the search
-        for (let i = 0; i < data.results.length; i++) {
+        for (let i = 0; i < titleResults.length; i++) {
             var searchCard = document.createElement("div");
             searchCard.classList.add("searchD","searchcard");
             showInfoDiv.appendChild(searchCard);
