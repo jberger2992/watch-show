@@ -3,8 +3,8 @@ var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-var imdbAPIKey = "k_erq5m755";
-// var imdbAPIKey = "k_6hswr9n7";
+// var imdbAPIKey = "k_erq5m755";
+var imdbAPIKey = "k_6hswr9n7";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 
@@ -318,6 +318,9 @@ function findPlatforms(){
 
 //Creates the elements to display the selected show
 function displayShow(){
+    document.querySelectorAll('.searchD').forEach(e => e.remove());
+    document.querySelectorAll('.selectedD').forEach(e => e.remove());
+    document.querySelectorAll('.favoriteD').forEach(e => e.remove());
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
     titleH3.innerText = selectedTitle;
