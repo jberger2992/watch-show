@@ -90,14 +90,17 @@ function searchShows(){
         console.log(data); // --remove for deploy--
         // displays for each result from the search
         for (let i = 0; i < data.results.length; i++) {
+            var searchCard = document.createElement("div");
+            searchCard.classList.add("delete","searchcard");
+            showInfoDiv.appendChild(searchCard);
             var titleBtn = document.createElement("button");
             titleBtn.innerText = data.results[i].title;
             titleBtn.classList.add("delete","searchbtn");
-            showInfoDiv.appendChild(titleBtn);
+            searchCard.appendChild(titleBtn);
             var descriptionP = document.createElement("p");
             descriptionP.innerText = data.results[i].description;
             descriptionP.classList.add("delete");
-            showInfoDiv.appendChild(descriptionP);
+            searchCard.appendChild(descriptionP);
             // on clicking a title it sets the values for that title and deletes the search results from the page
             titleBtn.addEventListener("click", function(){
                 selectedTitle = data.results[i].title;
@@ -142,6 +145,44 @@ function findPlatforms(){
             }
         }
     })
+    function searchNextDate(){
+  fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+selectedID+"/"+season)
+  .then(function (response) {
+      return response.json();
+    })
+    .then(function (data){
+        console.log(data); // --remove for deploy--
+        //loops through episodes from the latest season
+        for (let i = 0; i < data.episodes.length; i++) {
+            console.log(data.episodes[i].released)
+            var newDate = data.episodes[i].released.replace(".", "");
+            var newUnix = dayjs(newDate).unix();
+            var nowUnix = Date.now();
+            var newUnixM = newUnix*1000
+            //When the next coming episode is found, displays result to page
+            if(newUnixM > nowUnix){
+                var episodeTitle = document.createElement("p");
+                episodeTitle.innerText = data.episodes[i].title;
+                episodeTitle.classList.add("delete");
+                episodeDiv.appendChild(episodeTitle);
+                var episodeDate = document.createElement("p");
+                episodeDate.innerText = data.episodes[i].released;
+                episodeDate.classList.add("delete");
+                episodeDiv.appendChild(episodeDate);
+                return;
+            }
+        }
+        var lastEp = data.episodes.length - 1;
+        var oldEp = document.createElement("p");
+        oldEp.innerText = "Last aired episode: "
+        oldEp.classList.add("delete");
+        episodeDiv.appendChild(oldEp);
+        var recent = document.createElement('p');
+        recent.innerText = data.episodes[lastEp].released.replace(".", "");
+        recent.classList.add("delete");
+        episodeDiv.appendChild(recent);
+    })
+}
 }
 
 //Creates the elements to display the selected show
@@ -156,3 +197,55 @@ function displayShow(){
     searchSeasons();
 }
 
+function loadFavorites(){
+    var seasonFav = "1"
+    for (let i = 0; i < favoriteShows.length; i++) {
+            fetch ("https://imdb-api.com/en/API/Title/"+imdbAPIKey+"/"+favoriteShows[i])
+            .then(function (response) {
+                return response.json();
+              })
+              .then(function (data){
+                console.log(data); // --remove for deploy--
+                seasonFav = data.tvSeriesInfo.seasons.length;
+                loadNextDate();
+                })
+    }
+    function loadNextDate(){
+        fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+favoriteShows[i]+"/"+seasonFav)
+        .then(function (response) {
+            return response.json();
+          })
+          .then(function (data){
+              console.log(data); // --remove for deploy--
+              //loops through episodes from the latest season
+              for (let i = 0; i < data.episodes.length; i++) {
+                  console.log(data.episodes[i].released)
+                  var newDate = data.episodes[i].released.replace(".", "");
+                  var newUnix = dayjs(newDate).unix();
+                  var nowUnix = Date.now();
+                  var newUnixM = newUnix*1000
+                  //When the next coming episode is found, displays result to page
+                  if(newUnixM > nowUnix){
+                      var episodeTitle = document.createElement("p");
+                      episodeTitle.innerText = data.episodes[i].title;
+                      episodeTitle.classList.add("delete");
+                      episodeDiv.appendChild(episodeTitle);
+                      var episodeDate = document.createElement("p");
+                      episodeDate.innerText = data.episodes[i].released;
+                      episodeDate.classList.add("delete");
+                      episodeDiv.appendChild(episodeDate);
+                      return;
+                  }
+              }
+              var lastEp = data.episodes.length - 1;
+              var oldEp = document.createElement("p");
+              oldEp.innerText = "Last aired episode: "
+              oldEp.classList.add("delete");
+              episodeDiv.appendChild(oldEp);
+              var recent = document.createElement('p');
+              recent.innerText = data.episodes[lastEp].released.replace(".", "");
+              recent.classList.add("delete");
+              episodeDiv.appendChild(recent);
+          })
+      }
+}
