@@ -67,10 +67,18 @@ function searchNextDate(){
                 episodeDate.innerText = data.episodes[i].released;
                 episodeDate.classList.add("selectD");
                 episodeDiv.appendChild(episodeDate);                
-                var episodeDate = document.createElement("button");
-                episodeDate.innerText = "Favorite";
-                episodeDate.classList.add("selectD");
-                episodeDiv.appendChild(episodeDate);
+                    if(favoriteShowsID.length < 6){
+                    var favoriteBtn = document.createElement("button");
+                    favoriteBtn.innerText = "Favorite";
+                    favoriteBtn.classList.add("selectD");
+                    episodeDiv.appendChild(favoriteBtn);
+                    favoriteBtn.addEventListener("click", function(){
+                            favoriteShowsID.push(selectedID);
+                            favoriteShowsSea.push(season);
+                            localStorage.setItem("Favorite Shows", JSON.stringify(favoriteShowsID));
+                            localStorage.setItem("Favorite Shows Seasons", JSON.stringify(favoriteShowsSea));
+                        })
+                    }
                 return;
             }
         }
@@ -136,10 +144,11 @@ function findPlatforms(){
         //TODO: Instead of text, display links to streaming site
         var streamFree = document.createElement("h6");
         streamFree.textContent = "Free: "
-        streamFree.classList.add("delete");
+        streamFree.classList.add("streamD");
         platformFreeDiv.appendChild(streamFree);
         var streamSub = document.createElement("h6");
         streamSub.textContent = "Sub: "
+        streamFree.classList.add("streamD");
         platformSubDiv.appendChild(streamSub);
         for (let i = 0; i < data.sources.length; i++) {
             if(data.sources[i].type == "sub"){
@@ -163,9 +172,11 @@ function displayShow(){
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
     titleH3.innerText = selectedTitle;
+    titleH3.classList.add("selectD")
     showInfoDiv.appendChild(titleH3);
     var descriptionP = document.createElement("p");
     descriptionP.innerText = selectedDescription;
+    descriptionP.classList.add("selectD");
     showInfoDiv.appendChild(descriptionP);
     searchSeasons();
 }
