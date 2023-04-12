@@ -8,6 +8,18 @@ var imdbAPIKey = "k_erq5m755";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 
+
+// var updates possible shows list font format
+// var buttonFormat = document.querySelectorAll(".searchD .searchbtn");
+// buttonFormat.forEach(button => {
+//     button.style.fontWeight = "bold";
+//     button.style.fontColor = "blue";
+//     button.style.backgroundColor = "white";
+//     button.style.border = "none";
+//     buttonFormat.style.fontSize = "15px";
+//     button.style.padding = "2.5px";
+// });
+
 //var showSearched = inputArea.value
 var showSearched = "The Mandalorian"; // placeholder search
 

@@ -5,3 +5,17 @@
 /* .searchcard{
 
 } */
+.searchbtn {
+    /* background-color: blue; */
+    font-weight: bold;
+    font-size: large;
+    color: green;
+    border-style: none;
+    border-bottom: 10px solid green;
+    border-radius: 5px;
+    margin: 5.5px
+}
+
+.rollovericons a{
+    margin: 10px;
+}
