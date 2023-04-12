@@ -23,8 +23,8 @@ var episodeDiv = document.getElementById("episode");
 //var showSearched = inputArea.value
 var showSearched = "The Mandalorian"; // placeholder search
 
-var favoriteShowsID = []
-var favoriteShowsSea = []
+var favoriteShowsID = [];
+var favoriteShowsSea = [];
 // var favoriteShowsID = ["tt8111088", "tt3107288","tt0460627"] //placeholder shows
 // var favoriteShowsSea = ["3","9","12"] //placeholder seasons
 
@@ -153,27 +153,164 @@ function findPlatforms(){
     })
       .then(function (data){
         console.log(data); // --remove for deploy--
-        //TODO: Instead of text, display links to streaming site
         var streamFree = document.createElement("h6");
-        streamFree.textContent = "Free: "
+        streamFree.textContent = "Free: ";
         streamFree.classList.add("streamD");
         platformFreeDiv.appendChild(streamFree);
         var streamSub = document.createElement("h6");
-        streamSub.textContent = "Sub: "
+        streamSub.textContent = "Sub: ";
         streamFree.classList.add("streamD");
         platformSubDiv.appendChild(streamSub);
+        //creates direct links to popular streaming services and lists others
         for (let i = 0; i < data.sources.length; i++) {
             if(data.sources[i].type == "sub"){
                 console.log("sub", data.sources[i].name);
+                var subLink = " "
+                if (data.sources[i].name == "Disney+"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.disneyplus.com/");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if (data.sources[i].name == "Netflix"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.netflix.com/");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if (data.sources[i].name == "Hulu"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.hulu.com/");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if (data.sources[i].name == "Peacock Premium"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.peacocktv.com/");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if (data.sources[i].name == "Amazon Prime"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.amazon.com/gp/video/storefront/ref=atv_hm_hom_c_9zZ8D2_1_0");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if (data.sources[i].name == "HBO MAX"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.hbomax.com/");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if (data.sources[i].name == "Paramount+"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.paramountplus.com/");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if (data.sources[i].name == "Showtime"){
+                    subLink = document.createElement('a');
+                    subLink.classList.add("searchD");
+                    subLink.textContent = data.sources[i].name;
+                    subLink.setAttribute("target", "_blank");
+                    subLink.setAttribute("href", "https://www.sho.com/");
+                    platformSubDiv.appendChild(subLink);
+                }
+                if(subLink == " "){
                 var platformSub = document.createElement("p");
+                platformSub.classList.add("searchD");
                 platformSub.textContent = data.sources[i].name;
                 platformSubDiv.appendChild(platformSub); 
+                }
             }
             if(data.sources[i].type == "free"){
+                var freeLink = " ";
                 console.log("free", data.sources[i].name)
+                if (data.sources[i].name == "Peacock"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://www.peacocktv.com/");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if (data.sources[i].name == "Amazon Freevee"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://www.amazon.com/gp/video/storefront/ref=atv_hm_Categories_c_9zZ8D2_1_3?contentType=home&contentId=freetv");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if (data.sources[i].name == "Netflix Free"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://www.netflix.com/");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if (data.sources[i].name == "Crackle"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://www.crackle.com/");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if (data.sources[i].name == "HBO MAX Free"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://www.hbomax.com/collections/watch-free");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if (data.sources[i].name == "Crunchyroll"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://www.crunchyroll.com/");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if (data.sources[i].name == "Vimeo"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://vimeo.com/");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if (data.sources[i].name == "VUDU"){
+                    freeLink = document.createElement('a');
+                    freeLink.classList.add("searchD");
+                    freeLink.textContent = data.sources[i].name;
+                    freeLink.setAttribute("target", "_blank");
+                    freeLink.setAttribute("href", "https://www.vudu.com/");
+                    platformSubDiv.appendChild(freeLink);
+                }
+                if(freeLink == " "){
                 var platformFree = document.createElement("p");
+                platformFree.classList.add("searchD");
                 platformFree.textContent = data.sources[i].name;
                 platformFreeDiv.appendChild(platformFree);
+                }
+                
             }
         }
     })
@@ -192,7 +329,7 @@ function displayShow(){
     showInfoDiv.appendChild(descriptionP);
     searchSeasons();
 }
-
+//Loads up to 5 favorited shows from local storage
 function loadFavorites(){
     favoriteShowsID = JSON.parse(localStorage.getItem("Favorite Shows"));
     favoriteShowsSea = JSON.parse(localStorage.getItem("Favorite Shows Seasons"));
