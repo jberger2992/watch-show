@@ -1,7 +1,7 @@
 # watch-show
 
 https://jberger2992.github.io/watch-show/
-![screenshot](./assets/images/230411WatchShowSample.png)
+![screenshot](./assets/images/recentscreenshot.png)
 https://github.com/jberger2992/watch-show.git
 
 
