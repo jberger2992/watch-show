@@ -12,18 +12,16 @@
     <link rel="stylesheet" href="./assets/css/materialize.css">
 </head>
 <body>
-    <div class="container row">
+    <div id="page" class="container row">
         <header class="col s12">
             <h1>Watch-Show</h1>
         </header>
         <div class="col s12 m12 l6">
             <section id="card">
                 <form class="search-wrapper">
-                    <textarea name="" id="" cols="30" rows="10" placeholder="Search for a show!"></textarea>
+                    <textarea name="" id="search-text" cols="30" rows="10" placeholder="Search for a show!"></textarea>
                 </form>
 
-                <!-- inserts static image -->
-                <img id="static" src="./assets/images/popcorn.jpg" alt="">
                 <div class="card-footer">
                     <button id="generate" class="btn">Movie Data</button>
                 </div>
@@ -32,7 +30,7 @@
                 
             <div id="show-info">
                 <!-- First 4 results from "seachShows()" sample for styling -->
-                <!-- <div class="searchD searchcard">
+                <div class="searchD searchcard">
                     <button class="searchD searchbtn">The Mandalorian</button>
                 </div>
                 <div class="searchD searchcard">
@@ -43,7 +41,7 @@
                 </div>
                 <div class="searchD searchcard">
                     <button class="searchD searchbtn">Star Wars: Wrath of the Mandalorian</button>
-                </div> -->
+                </div>
             </div>
 
             <div id="episode"></div>
@@ -61,7 +59,21 @@
                 </div>
             </div>
 
+            <div id="extra-buttons" class="row">
+                <button id="reset-page-btn" class="col s12 m7 l7 btn">Show Favorites</button>
+                <button id="reset-favorites-btn" class="col s12 m4 l4 btn">Reset Favorites</button>
+            </div>
+
         </div>
+        
+        <section id="poster" class="col s12 m12 l6">
+
+            <!-- inserts static image -->
+            <img id="static" class="responsive-img" src="./assets/images/popcorn.jpg" alt="">
+            <img id="image" class="responsive-img" src="" alt="">
+
+        </section>
+
     </div>
 
 

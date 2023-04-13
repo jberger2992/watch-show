@@ -1,8 +1,8 @@
-/* .searchcard{
-
-} */
+body{
+    background-color: rgb(250, 255, 254);
+}
+/* TODO: adjust .seachbtn and/or .searchcard to look better */
 .searchbtn {
-    /* background-color: blue; */
     font-weight: bold;
     font-size: large;
     color: green;
@@ -10,6 +10,33 @@
     border-bottom: 10px solid green;
     border-radius: 5px;
     margin: 5.5px
+}
+
+.searchcard{
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 5px;
+    border: 3px solid rgb(0, 31, 24);
+    background-color: white;
+    color: rgb(0, 131, 87);
+    border-radius: 5px;
+}
+/* -------------------------------------------------------- */
+.favoritecard{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 10px;
+    padding-top: 0px;
+    border: 3px solid rgb(0, 131, 109);
+    background-color: rgb(0, 43, 39);
+    color: white;
+    border-radius: 5px;
+}
+
+.favoritecard p{
+    font-size: 125%;
+    margin: 2px;
 }
 
 .search-wrapper textarea{
@@ -24,21 +51,39 @@ text-indent: 10px; padding: 10px; border-radius: 15px;
     /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); */
     /* transition: all 0.3s ease; */
 }
+
 .rollovericons a{
     margin: 10px;
 }
 
-.favoritecard{
-    margin-top: 12px;
-    margin-bottom: 12px;
-    padding: 10px;
-    padding-top: 0px;
-    border: 3px solid rgb(0, 131, 87);
-    background-color: rgb(0, 31, 24);
-    color: white;
-    border-radius: 5px;
+
+
+#extra-buttons{
+    margin-top: 14px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
-.favoritecard p{
-    font-size: 125%;
-    margin: 2px;
+
+#reset-page-btn{
+    margin: 1px;
+}
+
+#reset-favorites-btn{
+    margin: 1px;
+}
+
+header{
+    margin-bottom: 5px;
+    background-color: rgb(0, 78, 78);
+    border: 1px solid rgb(0, 31, 24);
+    border-bottom-left-radius: 1.5px;
+    border-bottom-right-radius: 1.5px;
+}
+
+header h1{
+    color: white;
+}
+
+#search-text{
+    background-color: white;
 }

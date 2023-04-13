@@ -8,18 +8,8 @@ var imdbAPIKey = "k_6hswr9n7";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
-
-
-// var updates possible shows list font format
-// var buttonFormat = document.querySelectorAll(".searchD .searchbtn");
-// buttonFormat.forEach(button => {
-//     button.style.fontWeight = "bold";
-//     button.style.fontColor = "blue";
-//     button.style.backgroundColor = "white";
-//     button.style.border = "none";
-//     buttonFormat.style.fontSize = "15px";
-//     button.style.padding = "2.5px";
-// });
+var btnFavorites = document.getElementById("reset-page-btn");
+var btnReset = document.getElementById("reset-favorites-btn");
 
 //var showSearched = inputArea.value
 var showSearched = "The Mandalorian"; // placeholder search
@@ -36,7 +26,7 @@ var favoriteShowsSea = [];
 var selectedTitle = "The Mandalorian"; //placeholder search "The Mandalorian"
 var selectedID = "tt8111088"; // placeholder search "The Mandalorian"
 // var selectedID = "tt0460627"; // placeholder search "Bones"
-var selectedImage = "https://m.media-amazon.com/images/M/MV5BZjRlZDIyNDMtZjIwYi00YmJiLTg4NjMtODA2Mjc0YTBlNzIwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_Ratio0.6757_AL_.jpg"; //placeholder search "The Mandalorian"
+var selectedImage = "./assets/images/popcorn.jpg"
 var selectedDescription = "2019- TV Series Pedro Pascal, Chris Bartlett"; //placeholder search "The Mandalorian"
 var season = "3";
 
@@ -110,7 +100,7 @@ function searchNextDate(){
 // hides static image upon the main button click
 var searchButton = document.getElementById('generate');
 var staticImage = document.getElementById('static');
-searchButton.addEventListener('click',hideStatic);
+// searchButton.addEventListener('click',hideStatic);
 
 function hideStatic(){
     staticImage.style.display = 'none';
@@ -118,6 +108,7 @@ function hideStatic(){
 
 //fetches results for the searched title
 function searchShows(){
+    resetElements();
     fetch("https://imdb-api.com/en/API/SearchSeries/"+imdbAPIKey+"/"+showSearched)
     .then(function (response) {
         return response.json();
@@ -324,9 +315,8 @@ function findPlatforms(){
 
 //Creates the elements to display the selected show
 function displayShow(){
-    document.querySelectorAll('.searchD').forEach(e => e.remove());
-    document.querySelectorAll('.selectedD').forEach(e => e.remove());
-    document.querySelectorAll('.favoriteD').forEach(e => e.remove());
+    resetElements();
+    hideStatic();
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
     titleH3.innerText = selectedTitle;
@@ -350,15 +340,16 @@ function loadFavorites(){
                   })
                   .then(function (data){
                       console.log(data); // --remove for deploy--
-                      //loops through episodes from the latest season
+                      selectedImage = data.episodes[0].image
                       var favoriteCard = document.createElement("div");
                       favoriteCard.classList.add("favoriteD","favoritecard");
                       favoritesDiv.appendChild(favoriteCard);
                       var titleH5 = document.createElement("h5");
                       titleH5.innerText = data.title;
-                      favoriteCard.classList.add("favoriteD");
+                      titleH5.classList.add("favoriteD");
                       favoriteCard.appendChild(titleH5);
                       console.log(data); // --remove for deploy--
+                      //loops through episodes from the latest season
                       for (let i = 0; i < data.episodes.length; i++) {
                             console.log(data.episodes[i].released)
                             var newDate = data.episodes[i].released.replace(".", "");
@@ -390,4 +381,29 @@ function loadFavorites(){
                 })
             }
     }
+    setTimeout(function(){
+        imageArea.src = selectedImage;
+    }, 2000); 
+}
+
+btnFavorites.addEventListener("click", function(){
+    hideStatic();
+    resetElements();
+    loadFavorites();
+})
+
+btnReset.addEventListener("click", function(){
+    resetElements();
+    staticImage.style.display = 'inline';
+    favoriteShowsID = [];
+    favoriteShowsSea = [];
+    localStorage.removeItem("Favorite Shows");
+    localStorage.removeItem("Favorite Shows Seasons");
+})
+
+function resetElements(){
+    document.querySelectorAll('.searchD').forEach(e => e.remove());
+    document.querySelectorAll('.selectD').forEach(e => e.remove());
+    document.querySelectorAll('.favoriteD').forEach(e => e.remove());
+    imageArea.src = "";
 }
