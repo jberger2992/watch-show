@@ -6,7 +6,7 @@ https://github.com/jberger2992/watch-show.git
 
 
 Created by: Josh Berger, John Persem, Jason Johnson
-4/12/2023
+4/12/2023 live 4/13/2023
 
 Languages: HTML, CSS, JS, Materialize
 APIs: IMDB, Watchmode
