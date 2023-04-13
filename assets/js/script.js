@@ -26,7 +26,7 @@ var favoriteShowsSea = [];
 var selectedTitle = "The Mandalorian"; //placeholder search "The Mandalorian"
 var selectedID = "tt8111088"; // placeholder search "The Mandalorian"
 // var selectedID = "tt0460627"; // placeholder search "Bones"
-var selectedImage = "https://m.media-amazon.com/images/M/MV5BZjRlZDIyNDMtZjIwYi00YmJiLTg4NjMtODA2Mjc0YTBlNzIwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_Ratio0.6757_AL_.jpg"; //placeholder search "The Mandalorian"
+var selectedImage = "./assets/images/popcorn.jpg"
 var selectedDescription = "2019- TV Series Pedro Pascal, Chris Bartlett"; //placeholder search "The Mandalorian"
 var season = "3";
 
@@ -100,7 +100,7 @@ function searchNextDate(){
 // hides static image upon the main button click
 var searchButton = document.getElementById('generate');
 var staticImage = document.getElementById('static');
-searchButton.addEventListener('click',hideStatic);
+// searchButton.addEventListener('click',hideStatic);
 
 function hideStatic(){
     staticImage.style.display = 'none';
@@ -316,6 +316,7 @@ function findPlatforms(){
 //Creates the elements to display the selected show
 function displayShow(){
     resetElements();
+    hideStatic();
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
     titleH3.innerText = selectedTitle;
@@ -386,14 +387,14 @@ function loadFavorites(){
 }
 
 btnFavorites.addEventListener("click", function(){
-    hideStatic()
+    hideStatic();
     resetElements();
     loadFavorites();
 })
 
 btnReset.addEventListener("click", function(){
-    hideStatic()
     resetElements();
+    staticImage.style.display = 'inline';
     favoriteShowsID = [];
     favoriteShowsSea = [];
     localStorage.removeItem("Favorite Shows");
