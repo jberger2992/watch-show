@@ -10,6 +10,8 @@ var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
 var btnFavorites = document.getElementById("reset-page-btn");
 var btnReset = document.getElementById("reset-favorites-btn");
+var searchButton = document.getElementById("myButton");
+var textSearch = document.getElementById("textsearch");
 
 //var showSearched = inputArea.value
 var showSearched = "The Mandalorian"; // placeholder search
@@ -406,4 +408,8 @@ function resetElements(){
     document.querySelectorAll('.selectD').forEach(e => e.remove());
     document.querySelectorAll('.favoriteD').forEach(e => e.remove());
     imageArea.src = "";
+}
+searchButton.addEventListener("click"), function(){
+        showSearched = textSearch.value
+        searchShows()
 }
