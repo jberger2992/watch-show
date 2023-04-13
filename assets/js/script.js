@@ -1,10 +1,8 @@
-//var inputArea = document.querySelector("#");
 var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-var imdbAPIKey = "k_erq5m755";
-// var imdbAPIKey = "k_6hswr9n7";
+var imdbAPIKey = "k_zg0ls120";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
@@ -12,25 +10,18 @@ var btnFavorites = document.getElementById("reset-page-btn");
 var btnReset = document.getElementById("reset-favorites-btn");
 var searchButton = document.getElementById("myButton");
 var textSearch = document.getElementById("textsearch");
+var staticImage = document.getElementById('static');
 
-//var showSearched = inputArea.value
-var showSearched = "The Mandalorian"; // placeholder search
+var showSearched = " ";
+var favoriteShowsID = [" "];
+var favoriteShowsSea = [" "];
 
-var favoriteShowsID = [];
-var favoriteShowsSea = [];
-// var favoriteShowsID = ["tt8111088", "tt3107288","tt0460627"] //placeholder shows
-// var favoriteShowsSea = ["3","9","12"] //placeholder seasons
-
-//var selectedTitle = "";
-//var selectedID = "";
-//var selectedImage = "";
-//var selectedDescription = "";
-var selectedTitle = "The Mandalorian"; //placeholder search "The Mandalorian"
-var selectedID = "tt8111088"; // placeholder search "The Mandalorian"
-// var selectedID = "tt0460627"; // placeholder search "Bones"
+var selectedTitle = "";
+var selectedID = "";
+var selectedImage = "";
+var selectedDescription = "";
 var selectedImage = "./assets/images/popcorn.jpg"
-var selectedDescription = "2019- TV Series Pedro Pascal, Chris Bartlett"; //placeholder search "The Mandalorian"
-var season = "3";
+var season = "1";
 
 // This function finds the season information from a series and logs each episode's release date
 function searchSeasons(){
@@ -41,7 +32,6 @@ function searchSeasons(){
         return response.json();
       })
       .then(function (data){
-        console.log(data); // --remove for deploy--
         season = data.tvSeriesInfo.seasons.length;
         searchNextDate();
         })
@@ -54,7 +44,6 @@ function searchNextDate(){
       return response.json();
     })
     .then(function (data){
-        console.log(data); // --remove for deploy--
         //loops through episodes from the latest season
         for (let i = 0; i < data.episodes.length; i++) {
             console.log(data.episodes[i].released)
@@ -100,9 +89,6 @@ function searchNextDate(){
 }
 
 // hides static image upon the main button click
-var staticImage = document.getElementById('static');
-// searchButton.addEventListener('click',hideStatic);
-
 function hideStatic(){
     staticImage.style.display = 'none';
 }
@@ -115,7 +101,6 @@ function searchShows(){
         return response.json();
     })
       .then(function (data){
-        console.log(data); // --remove for deploy--
         var titleResults = data.results;
         console.log(titleResults);
         if(data.results.length > 10){
@@ -150,19 +135,17 @@ function findPlatforms(){
         return response.json();
     })
       .then(function (data){
-        console.log(data); // --remove for deploy--
         var streamFree = document.createElement("h6");
         streamFree.textContent = "Free: ";
-        streamFree.classList.add("streamD");
+        streamFree.classList.add("searchD");
         platformFreeDiv.appendChild(streamFree);
         var streamSub = document.createElement("h6");
         streamSub.textContent = "Sub: ";
-        streamFree.classList.add("streamD");
+        streamSub.classList.add("searchD");
         platformSubDiv.appendChild(streamSub);
         //creates direct links to popular streaming services and lists others
         for (let i = 0; i < data.sources.length; i++) {
             if(data.sources[i].type == "sub"){
-                console.log("sub", data.sources[i].name);
                 var subLink = " "
                 if (data.sources[i].name == "Disney+"){
                     subLink = document.createElement('a');
@@ -237,7 +220,6 @@ function findPlatforms(){
             }
             if(data.sources[i].type == "free"){
                 var freeLink = " ";
-                console.log("free", data.sources[i].name)
                 if (data.sources[i].name == "Peacock"){
                     freeLink = document.createElement('a');
                     freeLink.classList.add("searchD");
@@ -328,19 +310,17 @@ function displayShow(){
     descriptionP.classList.add("selectD");
     showInfoDiv.appendChild(descriptionP);
     searchSeasons();
+    findPlatforms();
 }
 //Loads up to 5 favorited shows from local storage
 function loadFavorites(){
-    favoriteShowsID = JSON.parse(localStorage.getItem("Favorite Shows"));
-    favoriteShowsSea = JSON.parse(localStorage.getItem("Favorite Shows Seasons"));
-    if(favoriteShowsID){
+    if(favoriteShowsID.length > 1){
     for (let i = 0; i < favoriteShowsID.length; i++) {
                 fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+favoriteShowsID[i]+"/"+favoriteShowsSea[i])
                 .then(function (response) {
                     return response.json();
                   })
                   .then(function (data){
-                      console.log(data); // --remove for deploy--
                       selectedImage = data.episodes[0].image
                       var favoriteCard = document.createElement("div");
                       favoriteCard.classList.add("favoriteD","favoritecard");
@@ -349,10 +329,8 @@ function loadFavorites(){
                       titleH5.innerText = data.title;
                       titleH5.classList.add("favoriteD");
                       favoriteCard.appendChild(titleH5);
-                      console.log(data); // --remove for deploy--
                       //loops through episodes from the latest season
                       for (let i = 0; i < data.episodes.length; i++) {
-                            console.log(data.episodes[i].released)
                             var newDate = data.episodes[i].released.replace(".", "");
                             var newUnix = dayjs(newDate).unix();
                             var nowUnix = Date.now();
@@ -385,6 +363,15 @@ function loadFavorites(){
     setTimeout(function(){
         imageArea.src = selectedImage;
     }, 2000); 
+}
+
+function initialLoad(){
+    var localID = JSON.parse(localStorage.getItem("Favorite Shows"));
+    var localSea = JSON.parse(localStorage.getItem("Favorite Shows Seasons"));
+    if(localID){
+        favoriteShowsID.push(localID);
+        favoriteShowsSea.push(localSea);
+    }
 }
 
 btnFavorites.addEventListener("click", function(){
@@ -421,3 +408,7 @@ textSearch.addEventListener('change', function(){
 function prevent(event){
     event.preventDefault();
 }
+
+
+initialLoad();
+loadFavorites();
