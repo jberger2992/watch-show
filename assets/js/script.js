@@ -109,7 +109,14 @@ function searchNextDate(){
     })
 }
 
+// hides static image upon the main button click
+var searchButton = document.getElementById('generate');
+var staticImage = document.getElementById('static');
+searchButton.addEventListener('click',hideStatic);
 
+function hideStatic(){
+    staticImage.style.display = 'none';
+}
 
 //fetches results for the searched title
 function searchShows(){
