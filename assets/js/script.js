@@ -100,7 +100,6 @@ function searchNextDate(){
 }
 
 // hides static image upon the main button click
-var searchButton = document.getElementById('generate');
 var staticImage = document.getElementById('static');
 // searchButton.addEventListener('click',hideStatic);
 
@@ -409,7 +408,16 @@ function resetElements(){
     document.querySelectorAll('.favoriteD').forEach(e => e.remove());
     imageArea.src = "";
 }
-searchButton.addEventListener("click"), function(){
+searchButton.addEventListener("click", function(){
         showSearched = textSearch.value
         searchShows()
+})
+
+textSearch.addEventListener('change', function(){
+    showSearched = textSearch.value
+    searchShows()
+})
+
+function prevent(event){
+    event.preventDefault();
 }
