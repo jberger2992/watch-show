@@ -14,13 +14,14 @@
 <body>
     <div id="page" class="container row">
         <header class="col s12">
+            <p id="credit">Searches powered by <a class="atag" href="https://imdb-api.com/">IMDb-API</a> and <a class="atag" href="https://api.watchmode.com/">WATCHMODE</a>.</p>
             <h1>Watch-Show</h1>
         </header>
         <div class="col s12 m12 l6">
             <section id="card">
-                <form>
-                    <input type="text" id="textsearch" cols="30" rows="10"></input><br>
-                </form>
+                <div id="form">
+                    <input type="text" id="textsearch" cols="30" rows="10" placeholder="Search for a show!"></input><br>
+                </div>
                 <div class="card-footer">
                     <button type="button" id="myButton" class="btn">Find Your Show</button>
                 </div>
@@ -29,7 +30,7 @@
                 
             <div id="show-info">
                 <!-- First 4 results from "seachShows()" sample for styling -->
-                <div class="searchD searchcard">
+                <!-- <div class="searchD searchcard">
                     <button class="searchD searchbtn">The Mandalorian</button>
                 </div>
                 <div class="searchD searchcard">
@@ -40,7 +41,7 @@
                 </div>
                 <div class="searchD searchcard">
                     <button class="searchD searchbtn">Star Wars: Wrath of the Mandalorian</button>
-                </div>
+                </div> -->
             </div>
 
             <div id="episode"></div>
@@ -51,11 +52,11 @@
             </div>
 
             <div id="favorites">
-                <div class="favoriteD favoritecard">
+                <!-- <div class="favoriteD favoritecard">
                     <h5 class="favoriteD">The Mandalorian</h5>
                     <p class="favoriteD">Chapter 23</p>
                     <p class="favoriteD">14 Mar. 2023</p>
-                </div>
+                </div> -->
             </div>
 
             <div id="extra-buttons" class="row">

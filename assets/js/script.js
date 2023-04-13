@@ -3,8 +3,8 @@ var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-// var imdbAPIKey = "k_erq5m755";
-var imdbAPIKey = "k_6hswr9n7";
+var imdbAPIKey = "k_erq5m755";
+// var imdbAPIKey = "k_6hswr9n7";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
@@ -74,7 +74,7 @@ function searchNextDate(){
                 episodeDiv.appendChild(episodeDate);
                     if(favoriteShowsID.length < 6){
                     var favoriteBtn = document.createElement("button");
-                    favoriteBtn.innerText = "Favorite";
+                    favoriteBtn.innerText = "Add Fav";
                     favoriteBtn.classList.add("selectD");
                     episodeDiv.appendChild(favoriteBtn);
                     favoriteBtn.addEventListener("click", function(){
@@ -100,7 +100,6 @@ function searchNextDate(){
 }
 
 // hides static image upon the main button click
-var searchButton = document.getElementById('generate');
 var staticImage = document.getElementById('static');
 // searchButton.addEventListener('click',hideStatic);
 
@@ -409,7 +408,16 @@ function resetElements(){
     document.querySelectorAll('.favoriteD').forEach(e => e.remove());
     imageArea.src = "";
 }
-searchButton.addEventListener("click"), function(){
+searchButton.addEventListener("click", function(){
         showSearched = textSearch.value
         searchShows()
+})
+
+textSearch.addEventListener('change', function(){
+    showSearched = textSearch.value
+    searchShows()
+})
+
+function prevent(event){
+    event.preventDefault();
 }
