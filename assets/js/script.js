@@ -8,6 +8,8 @@ var imdbAPIKey = "k_6hswr9n7";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
+var btnFavorites = document.getElementById("reset-page-btn");
+var btnReset = document.getElementById("reset-favorites-btn");
 
 
 // var updates possible shows list font format
@@ -111,6 +113,7 @@ function searchNextDate(){
 
 //fetches results for the searched title
 function searchShows(){
+    resetElements();
     fetch("https://imdb-api.com/en/API/SearchSeries/"+imdbAPIKey+"/"+showSearched)
     .then(function (response) {
         return response.json();
@@ -317,9 +320,7 @@ function findPlatforms(){
 
 //Creates the elements to display the selected show
 function displayShow(){
-    document.querySelectorAll('.searchD').forEach(e => e.remove());
-    document.querySelectorAll('.selectedD').forEach(e => e.remove());
-    document.querySelectorAll('.favoriteD').forEach(e => e.remove());
+    resetElements();
     imageArea.src = selectedImage;
     var titleH3 = document.createElement("h3");
     titleH3.innerText = selectedTitle;
@@ -343,7 +344,7 @@ function loadFavorites(){
                   })
                   .then(function (data){
                       console.log(data); // --remove for deploy--
-                      //loops through episodes from the latest season
+                      selectedImage = data.episodes[0].image
                       var favoriteCard = document.createElement("div");
                       favoriteCard.classList.add("favoriteD","favoritecard");
                       favoritesDiv.appendChild(favoriteCard);
@@ -351,14 +352,8 @@ function loadFavorites(){
                       titleH5.innerText = data.title;
                       titleH5.classList.add("favoriteD");
                       favoriteCard.appendChild(titleH5);
-                      var removeBtn = document.createElement("button");
-                      removeBtn.innerText = "X";
-                      remove.classList.add("favoriteD");
-                      favoriteCard.appendChild(titleH5);
-                      removeBtn.addEventListener("click", function(){
-                        
-                      })
                       console.log(data); // --remove for deploy--
+                      //loops through episodes from the latest season
                       for (let i = 0; i < data.episodes.length; i++) {
                             console.log(data.episodes[i].released)
                             var newDate = data.episodes[i].released.replace(".", "");
@@ -390,4 +385,27 @@ function loadFavorites(){
                 })
             }
     }
+    setTimeout(function(){
+        imageArea.src = selectedImage;
+    }, 2000); 
+}
+
+btnFavorites.addEventListener("click", function(){
+    resetElements();
+    loadFavorites();
+})
+
+btnReset.addEventListener("click", function(){
+    resetElements();
+    favoriteShowsID = [];
+    favoriteShowsSea = [];
+    localStorage.removeItem("Favorite Shows");
+    localStorage.removeItem("Favorite Shows Seasons");
+})
+
+function resetElements(){
+    document.querySelectorAll('.searchD').forEach(e => e.remove());
+    document.querySelectorAll('.selectD').forEach(e => e.remove());
+    document.querySelectorAll('.favoriteD').forEach(e => e.remove());
+    imageArea.src = "";
 }

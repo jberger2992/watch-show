@@ -53,3 +53,15 @@ text-indent: 10px; padding: 10px; border-radius: 15px;
     color: rgb(0, 131, 87);
     border-radius: 5px;
 }
+
+#extra-buttons{
+    margin-top: 14px;
+    margin-left: 0px;
+}
+
+#reset-page-btn{
+    margin: 1px;
+}
+#reset-favorites-btn{
+    margin: 1px;
+}
