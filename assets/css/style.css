@@ -1,6 +1,7 @@
-/* .searchcard{
+body{
+    background-color: rgb(250, 255, 254);
+}
 
-} */
 .searchbtn {
     /* background-color: blue; */
     font-weight: bold;
@@ -41,7 +42,6 @@ text-indent: 10px; padding: 10px; border-radius: 15px;
 .favoritecard p{
     font-size: 125%;
     margin: 2px;
-<<<<<<< HEAD
 }
 
 .searchcard{
@@ -58,6 +58,7 @@ text-indent: 10px; padding: 10px; border-radius: 15px;
 #extra-buttons{
     margin-top: 14px;
     margin-left: 0px;
+    margin-right: 0px;
 }
 
 #reset-page-btn{
@@ -65,6 +66,20 @@ text-indent: 10px; padding: 10px; border-radius: 15px;
 }
 #reset-favorites-btn{
     margin: 1px;
-=======
->>>>>>> dev
+}
+
+header{
+    margin-bottom: 5px;
+    background-color: rgb(0, 78, 78);
+    border: 1px solid rgb(0, 31, 24);
+    border-bottom-left-radius: 1.5px;
+    border-bottom-right-radius: 1.5px;
+}
+
+header h1{
+    color: white;
+}
+
+#search-text{
+    background-color: white;
 }
