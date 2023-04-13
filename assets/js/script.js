@@ -330,7 +330,7 @@ function loadFavorites(){
                       favoriteCard.appendChild(titleH5);
                       //loops through episodes from the latest season
                       for (let i = 0; i < data.episodes.length; i++) {
-                            var newDate = data.episodes[1].released.replace(".", "");
+                            var newDate = data.episodes[i].released.replace(".", "");
                             var newUnix = dayjs(newDate).unix();
                             var nowUnix = Date.now();
                             var newUnixM = newUnix*1000
