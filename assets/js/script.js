@@ -2,7 +2,8 @@ var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-var imdbAPIKey = "k_zg0ls120";
+// var imdbAPIKey = "k_zg0ls120";
+var imdbAPIKey = "k_b53vv5z5";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
@@ -13,8 +14,8 @@ var textSearch = document.getElementById("textsearch");
 var staticImage = document.getElementById('static');
 
 var showSearched = " ";
-var favoriteShowsID = [" "];
-var favoriteShowsSea = [" "];
+var favoriteShowsID = [];
+var favoriteShowsSea = [];
 
 var selectedTitle = "";
 var selectedID = "";
@@ -314,14 +315,13 @@ function displayShow(){
 }
 //Loads up to 5 favorited shows from local storage
 function loadFavorites(){
-    if(favoriteShowsID.length > 1){
+    if(favoriteShowsID.length > 0){
     for (let i = 0; i < favoriteShowsID.length; i++) {
                 fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+favoriteShowsID[i]+"/"+favoriteShowsSea[i])
                 .then(function (response) {
                     return response.json();
                   })
                   .then(function (data){
-                      selectedImage = data.episodes[0].image
                       var favoriteCard = document.createElement("div");
                       favoriteCard.classList.add("favoriteD","favoritecard");
                       favoritesDiv.appendChild(favoriteCard);
@@ -337,6 +337,7 @@ function loadFavorites(){
                             var newUnixM = newUnix*1000
                             //When the next coming episode is found, displays result to page
                             if(newUnixM > nowUnix){
+                                selectedImage = data.episodes[1].image
                                 var episodeTitle = document.createElement("p");
                                 episodeTitle.innerText = data.episodes[i].title;
                                 episodeTitle.classList.add("favoriteD");
@@ -383,8 +384,8 @@ btnFavorites.addEventListener("click", function(){
 btnReset.addEventListener("click", function(){
     resetElements();
     staticImage.style.display = 'inline';
-    favoriteShowsID = [" "];
-    favoriteShowsSea = [" "];
+    favoriteShowsID = [];
+    favoriteShowsSea = [];
     localStorage.removeItem("Favorite Shows");
     localStorage.removeItem("Favorite Shows Seasons");
 })
