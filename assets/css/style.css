@@ -1,0 +1,119 @@
+body{
+    background-color: rgb(250, 255, 254);
+}
+
+.searchbtn {
+    font-weight: bold;
+    font-size: large;
+    color: green;
+    border-style: none;
+    border-bottom: 10px solid green;
+    border-radius: 5px;
+    margin: 5.5px
+}
+
+.searchcard{
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 5px;
+    border: 3px solid rgb(0, 31, 24);
+    background-color: white;
+    color: rgb(0, 131, 87);
+    border-radius: 5px;
+}
+
+.favoritecard{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 10px;
+    padding-top: 0px;
+    border: 3px solid rgb(0, 131, 109);
+    background-color: rgb(0, 43, 39);
+    color: white;
+    border-radius: 5px;
+}
+
+.favoritecard p{
+    font-size: 125%;
+    margin: 2px;
+}
+
+div#form{
+    border: 1px solid rgb(26, 100, 93);
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+input{
+text-indent: 10px; padding: 10px; border-radius: 15px;
+}
+
+.rollovericons a{
+    margin: 10px;
+}
+
+
+
+#extra-buttons{
+    margin-top: 14px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#reset-page-btn{
+    margin: 1px;
+}
+
+#reset-favorites-btn{
+    margin: 1px;
+}
+
+header{
+    display: flex;
+    height: auto;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    background-color: rgb(0, 78, 78);
+    border: 1px solid rgb(0, 31, 24);
+    border-bottom-left-radius: 1.5px;
+    border-bottom-right-radius: 1.5px;
+}
+
+header h1{
+    color: white;
+}
+
+#search-text{
+    background-color: white;
+}
+
+button.selectD{
+    margin: 1px;
+    margin-left: 3px;
+    padding: 4px;
+    color: white;
+    background-color: rgb(0, 78, 78);
+    border: 1px solid rgb(0, 31, 24);
+    border-radius: 2px;
+}
+
+button.selectD:hover{
+    background-color: rgb(0, 131, 109);
+}
+
+.selectD{
+    margin: 3px;
+}
+
+#credit{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+p#credit{
+    color: rgb(63, 151, 114);
+}
+.atag{
+    color: rgb(0, 139, 86);
+}

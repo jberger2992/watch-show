@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Watch-Show</title>
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/materialize.css">
+</head>
+<body>
+    <div id="page" class="container row">
+        <header class="col s12">
+            <p id="credit">Searches powered by <a class="atag" href="https://imdb-api.com/">IMDb-API</a> and <a class="atag" href="https://api.watchmode.com/">WATCHMODE</a>.</p>
+            <h1>Watch-Show</h1>
+        </header>
+        <div class="col s12 m12 l6">
+            <section id="card">
+                <div id="form">
+                    <input type="text" id="textsearch" cols="30" rows="10" placeholder="Search for a show!"></input><br>
+                </div>
+                <div class="card-footer">
+                    <button type="button" id="myButton" class="btn">Find Your Show</button>
+                </div>
+            <section>
+
+                
+            <div id="show-info"></div>
+
+            <div id="episode"></div>
+
+            <div id="platform">
+                <div id="platformSub"></div>
+                <div id="platformFree"></div>
+            </div>
+
+            <div id="favorites"></div>
+
+            <div id="extra-buttons" class="row">
+                <button id="reset-page-btn" class="col s12 m7 l7 btn">Show Favorites</button>
+                <button id="reset-favorites-btn" class="col s12 m4 l4 btn">Reset Favorites</button>
+            </div>
+
+        </div>
+        
+        <section id="poster" class="col s12 m12 l6">
+
+            <img id="image" class="responsive-img" src="" alt="">
+
+        </section>
+
+    </div>
+
+
+        <script type="text/javascript" src="./assets/js/materialize.js"></script>
+        <script src="./assets/js/script.js"></script>
+        <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
