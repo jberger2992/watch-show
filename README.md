@@ -2,6 +2,7 @@
 
 https://jberger2992.github.io/watch-show/
 ![screenshot](./assets/images/recentScreenshot.png)
+![screenshot](./assets/images/recentScreenshot2.png)
 https://github.com/jberger2992/watch-show.git
 
 
