@@ -2,7 +2,8 @@ var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-var imdbAPIKey = "k_zg0ls120";
+// var imdbAPIKey = "k_zg0ls120";
+var imdbAPIKey = "k_b53vv5z5";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
@@ -336,7 +337,7 @@ function loadFavorites(){
                             var newUnixM = newUnix*1000
                             //When the next coming episode is found, displays result to page
                             if(newUnixM > nowUnix){
-                                selectedImage = data.episodes[i].image
+                                selectedImage = data.episodes[1].image
                                 var episodeTitle = document.createElement("p");
                                 episodeTitle.innerText = data.episodes[i].title;
                                 episodeTitle.classList.add("favoriteD");
