@@ -72,7 +72,7 @@ function searchNextDate(){
                 episodeDate.innerText = data.episodes[i].released;
                 episodeDate.classList.add("selectD");
                 episodeDiv.appendChild(episodeDate);
-                    if(favoriteShowsID.length < 6){
+                    if(favoriteShowsID.length < 7){
                     var favoriteBtn = document.createElement("button");
                     favoriteBtn.innerText = "Add Fav";
                     favoriteBtn.classList.add("selectD");
@@ -396,8 +396,8 @@ btnFavorites.addEventListener("click", function(){
 btnReset.addEventListener("click", function(){
     resetElements();
     staticImage.style.display = 'inline';
-    favoriteShowsID = [];
-    favoriteShowsSea = [];
+    favoriteShowsID = [" "];
+    favoriteShowsSea = [" "];
     localStorage.removeItem("Favorite Shows");
     localStorage.removeItem("Favorite Shows Seasons");
 })
