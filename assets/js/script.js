@@ -2,8 +2,7 @@ var platformFreeDiv = document.getElementById("platformFree");
 var platformSubDiv = document.getElementById("platformSub");
 var imageArea = document.querySelector("#image");
 var watchAPIKey = "kexqrRzfkp9L3pTm4GEx1pAlL0xl51BftYIYPNjC";
-// var imdbAPIKey = "k_zg0ls120";
-var imdbAPIKey = "k_b53vv5z5";
+var imdbAPIKey = "k_erq5m755";
 var showInfoDiv = document.getElementById("show-info");
 var episodeDiv = document.getElementById("episode");
 var favoritesDiv = document.getElementById("favorites");
@@ -315,7 +314,11 @@ function displayShow(){
 }
 //Loads up to 5 favorited shows from local storage
 function loadFavorites(){
-    if(favoriteShowsID.length > 0){
+    if(favoriteShowsID[0] == " "){
+        favoriteShowsID.splice(0,1);
+        favoriteShowsSea.splice(0,1);
+    }
+    if(favoriteShowsID){
     for (let i = 0; i < favoriteShowsID.length; i++) {
                 fetch("https://imdb-api.com/en/API/SeasonEpisodes/"+imdbAPIKey+"/"+favoriteShowsID[i]+"/"+favoriteShowsSea[i])
                 .then(function (response) {
@@ -361,18 +364,22 @@ function loadFavorites(){
                 })
             }
     }
+    else if(!favoriteShowsID){
+        favoriteShowsID = [" "];
+        favoriteShowsSea = [" "];
+    }
     setTimeout(function(){
         imageArea.src = selectedImage;
     }, 2000); 
 }
 
 function initialLoad(){
-    var localID = JSON.parse(localStorage.getItem("Favorite Shows"));
-    var localSea = JSON.parse(localStorage.getItem("Favorite Shows Seasons"));
-    if(localID){
-        favoriteShowsID.push(localID);
-        favoriteShowsSea.push(localSea);
-    }
+    favoriteShowsID = JSON.parse(localStorage.getItem("Favorite Shows"));
+    favoriteShowsSea = JSON.parse(localStorage.getItem("Favorite Shows Seasons"));
+    // if(localID){
+    //     favoriteShowsID.push(localID);
+    //     favoriteShowsSea.push(localSea);
+    // }
 }
 
 btnFavorites.addEventListener("click", function(){
@@ -396,10 +403,10 @@ function resetElements(){
     document.querySelectorAll('.favoriteD').forEach(e => e.remove());
     imageArea.src = "";
 }
-searchButton.addEventListener("click", function(){
-        showSearched = textSearch.value
-        searchShows()
-})
+// searchButton.addEventListener("click", function(){
+//         showSearched = textSearch.value
+//         searchShows()
+// })
 
 textSearch.addEventListener('change', function(){
     showSearched = textSearch.value
@@ -410,6 +417,6 @@ function prevent(event){
     event.preventDefault();
 }
 
-
+hideStatic();
 initialLoad();
 loadFavorites();
